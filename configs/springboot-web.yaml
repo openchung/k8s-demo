@@ -13,9 +13,11 @@ spec:
       labels:
         app: springboot-web-demo
     spec:
+      nodeSelector:
+        app: ingress 
       containers:
       - name: springboot-web-demo
-        image: hub.mooc.com/kubernetes/springboot-web:v1
+        image: hub.k8s.com/kubernetes/springboot-web:v1
         ports:
         - containerPort: 8080
 ---

@@ -13,9 +13,11 @@ spec:
       labels:
         app: web-demo
     spec:
+      nodeSelector:
+        app: ingress
       containers:
       - name: web-demo
-        image: hub.mooc.com/kubernetes/web:v1
+        image: hub.k8s.com/kubernetes/web:v1
         ports:
         - containerPort: 8080
 ---

@@ -26,7 +26,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       containers:
       - name: dubb-demo
-        image: hub.mooc.com/kubernetes/dubbo:v1
+        image: hub.k8s.com/kubernetes/dubbo:v1
         ports:
         - containerPort: 20881
         env:

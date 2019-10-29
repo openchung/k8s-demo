@@ -15,11 +15,16 @@ if [ -z "${SERVER_NAME}" ]; then
 	exit 1
 fi
 
-PIDS=`ps  --no-heading -C java -f --width 1000 | grep "${CONF_DIR}" |awk '{print $2}'`
-if [ -n "${PIDS}" ]; then
-    echo "ERROR: The ${SERVER_NAME} already started!"
-    echo "PID: ${PIDS}"
-    exit 1
+#PIDS=`ps  --no-heading -C java -f --width 1000 | grep "${CONF_DIR}" |awk '{print $2}'`
+#if [ -n "${PIDS}" ]; then
+#    echo "ERROR: The ${SERVER_NAME} already started!"
+#    echo "PID: ${PIDS}"
+#    exit 1
+#fi
+
+if [ ! -z "${DUBBO_PORT}" ];then
+     sed -i "s/dubbo.protocol.port=${SERVER_PORT}/dubbo.protocol.port=${DUBBO_PORT}/g" conf/dubbo.properties
+     SERVER_PORT=${DUBBO_PORT}
 fi
 
 if [ -n "${SERVER_PORT}" ]; then
@@ -52,8 +57,8 @@ fi
 
 echo -e "Starting the ${SERVER_NAME} ...\c"
 
-nohup ${JAVA_HOME}/bin/java -Dapp.name=${SERVER_NAME} ${JAVA_OPTS} ${JAVA_DEBUG_OPTS} ${JAVA_JMX_OPTS} -classpath ${CONF_DIR}:${LIB_JARS} com.alibaba.dubbo.container.Main >> ${STDOUT_FILE} 2>&1 &
+${JAVA_HOME}/bin/java -Dapp.name=${SERVER_NAME} ${JAVA_OPTS} ${JAVA_DEBUG_OPTS} ${JAVA_JMX_OPTS} -classpath ${CONF_DIR}:${LIB_JARS} com.alibaba.dubbo.container.Main
 
-PIDS=`ps  --no-heading -C java -f --width 1000 | grep "${DEPLOY_DIR}" | awk '{print $2}'`
-echo "PID: ${PIDS}"
-echo "STDOUT: ${STDOUT_FILE}"
+#PIDS=`ps  --no-heading -C java -f --width 1000 | grep "${DEPLOY_DIR}" | awk '{print $2}'`
+#echo "PID: ${PIDS}"
+#echo "STDOUT: ${STDOUT_FILE}"

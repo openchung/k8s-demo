@@ -18,4 +18,4 @@ spec:
           restartPolicy: Never
           containers:
           - name: cronjob-demo
-            image: hub.mooc.com/kubernetes/cronjob:v1
+            image: hub.k8s.com/kubernetes/cronjob:v1
