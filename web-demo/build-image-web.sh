@@ -34,6 +34,6 @@ fi
 VERSION=$(date +%Y%m%d%H%M%S)
 IMAGE_NAME=hub.k8s.com/kubernetes/${JOB_NAME}:${VERSION}
 echo "Building image: ${IMAGE_NAME}"
-docker build -t ${IMAGE_NAME}
+docker build -t ${IMAGE_NAME} .
 docker push ${IMAGE_NAME}
 
